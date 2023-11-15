@@ -1,4 +1,4 @@
-# Pay With JetCrypto
+# <center> Pay With JetCrypto </center>
 ### Just HTML & CSS & JAVASCRIPT
 index.html<br/>
 ### RealTime Payment System
