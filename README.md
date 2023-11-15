@@ -1,4 +1,4 @@
-# CryptoPay
+# Pay With JetCrypto
 ### Just HTML & CSS & JAVASCRIPT
 index.html<br/>
 ### RealTime Payment System
