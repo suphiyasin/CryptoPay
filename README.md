@@ -5,7 +5,7 @@ index.html<br/>
 PHP => JetCrypto.php<br/>
 JS => Cooming Soon<br/>
 
-### Insstall
+### Install
 Step 1 : Add Wallet Addresses in JetCrypto.php (first 6 lines) and Edit Amount in JetCrypto.php (Line : 71) <br/>
 Step 2 : Edit Wallet Address in api.php (Line : 45)  <br/>
 Step 3 : Test it!
