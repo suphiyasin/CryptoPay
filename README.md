@@ -1,4 +1,7 @@
-# <center> Pay With JetCrypto </center>
+### What is JetCrypto?
+JetCrypto is the system that instantly confirms your crypto payments. <br/>
+It has been shared as open source for you to take additional security measures. <br/>
+For example: saving the hash information in the database, this way each payment can be verified only once. <br/>
 ### Just HTML & CSS & JAVASCRIPT
 index.html<br/>
 ### RealTime Payment System
