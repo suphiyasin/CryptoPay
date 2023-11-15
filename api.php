@@ -33,8 +33,16 @@ function simulate_transaction_verification($transaction_datetime) {
 function verify_payment_with_hash($expected_amount) {
     $transaction_hash = $_GET['hash'];
     $transaction_data = get_transaction_status($transaction_hash);
-    $receiver_address = isset($transaction_data['contractData']['to_address']) ? $transaction_data['contractData']['to_address'] : '';
-    $myTrxAddress = 'TRsWGn75MPwMgKaEuETPqB4P67e6w9L9JT';
+$receiver_address = '';
+
+if (!empty($transaction_data['trc20TransferInfo']) && isset($transaction_data['trc20TransferInfo'][0]['to_address'])) {
+    $receiver_address = $transaction_data['trc20TransferInfo'][0]['to_address'];
+} elseif (isset($transaction_data['contractData']['to_address'])) {
+    $receiver_address = $transaction_data['contractData']['to_address'];
+}   
+
+
+   $myTrxAddress = 'TS8YAMvEDnnkxABiG7MzSwASMKtKCUeeFv';
     $result = array(
         "Status" => "",
         "SentAmount" => "",
@@ -52,10 +60,11 @@ function verify_payment_with_hash($expected_amount) {
             $status = $transaction_data['contractRet'];
             $result["Status"] = $status;
             if ($status == "SUCCESS") {
-                if (isset($transaction_data['contractData']) && isset($transaction_data['contractData']['amount'])) {
-                    $actual_amount = intval($transaction_data['contractData']['amount']) / 10**6;
+				  if (isset($transaction_data['contractData']) && isset($transaction_data['contractData']['amount'])) {
+        $actual_amount = intval($transaction_data['contractData']['amount']) / 10**6;
 
-                    $result["SentAmount"] = $actual_amount;
+        $result["SentAmount"] = $actual_amount;
+        $expected_amount = floatval($expected_amount); 
                     if ($actual_amount >= $expected_amount) {
                         $result["ExpectedAmount"] = $expected_amount;
                         $result["ReceivedAmount"] = "OK";
@@ -90,8 +99,10 @@ function verify_payment_with_hash($expected_amount) {
     }
     echo json_encode($result);
 }
-
+if($_GET['request'] == 'CheckTransaction'){
 $expected_amount = $_GET['amount'];  // Adjust the expected amount as needed
 verify_payment_with_hash($expected_amount);
-
+}else{
+	echo "Bad Request";
+}
 ?>
