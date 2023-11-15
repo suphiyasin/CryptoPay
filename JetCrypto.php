@@ -45,19 +45,20 @@ $usdtadress = "DDDDDDDDDDDDDDDDDD";
                                 <input class="btn btn-danger dropdown-toggle" type="button" id="cryptoDropdown" value="Tron (TRX)" data-bs-toggle="dropdown" aria-expanded="false">
                                
                                 <ul class="dropdown-menu" aria-labelledby="cryptoDropdown">
-                                   <!--
-                                  <li><a onclick="selectCrypto('btc')" class="dropdown-item crypto-option" href="#" data-crypto="btc"><img src="btc.png" alt="Bitcoin"> Bitcoin (BTC)</a></li>
+                                    <li><a onclick="selectCrypto('btc')" class="dropdown-item crypto-option" href="#" data-crypto="btc"><img src="btc.png" alt="Bitcoin"> Bitcoin (BTC)</a></li>
                                     <li><a onclick="selectCrypto('eth')" class="dropdown-item crypto-option" href="#" data-crypto="eth"><img src="eth.png" alt="Ethereum"> Ethereum (ETH)</a></li>
-                                   -->
-                                  <li><a onclick="selectCrypto('trx')" class="dropdown-item crypto-option" href="#" data-crypto="trx"><img src="trx.png" alt="Tron" selected> Tron (TRX)</a></li>
+                                    <li><a onclick="selectCrypto('trx')" class="dropdown-item crypto-option" href="#" data-crypto="trx"><img src="trx.png" alt="Tron" selected> Tron (TRX)</a></li>
                                     <li><a onclick="selectCrypto('usdt')" class="dropdown-item crypto-option" href="#" data-crypto="usdt"><img src="usdt.svg" alt="Tether"> Tether (USDT)</a></li>
                                    
                                 </ul>
+								 
                                 <input type="hidden" name="crypto" id="selectedCrypto">
                             </div>
 							</center>
                         </div>
 						<div id="hashInputDiv" style="display: none;">
+						<center><div id="countdown" class="mt-3">Loading..</div></center>
+						<hr />
     <div class="mb-3">
         <label for="hash" class="form-label">Transaction Hash:</label>
         <input type="text" class="form-control" id="hash">
@@ -71,6 +72,7 @@ let cryptoType = "TRX";
 let amount = 50;
 let SelectedWalletAdress = "<?php echo $btcadress ?>";
 let ApiLink = "http://localhost/s-client/JetCrypto/api.php";
+let countdown;
 function copyToClipboard(elementId) {
     var element = document.getElementById(elementId);
     element.select();
@@ -83,7 +85,25 @@ function copyToClipboard(elementId) {
     });
 }
 
+ function startCountdown() {
+        let timeLeft = 300; // 5 minutes in seconds
+
+        countdown = setInterval(function () {
+            let minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+
+            document.getElementById('countdown').innerText = `${minutes}:${seconds}`;
+
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                document.getElementById('countdown').innerText = "Time's up!";
+            }
+
+            timeLeft -= 1;
+        }, 1000);
+    }
 function showHashInput() {
+	startCountdown();
        var trxInfoDiv = document.getElementById('CryBody');
     if (!trxInfoDiv) {
         trxInfoDiv = document.createElement('div');
@@ -103,6 +123,7 @@ document.getElementById("slctcry").style.display = 'none';
 
 
 function Complete() {
+	 clearInterval(countdown);
 	var hash = document.getElementById("hash").value;
 	
 	const url = `http://localhost/s-client/JetCrypto/api.php?request=CheckTransaction&amount=${amount}&hash=${hash}`;
@@ -145,6 +166,7 @@ function selectCrypto(crypto) {
         document.getElementById("cryptoDropdown").value = "Ethereum (ETH)";
 		SelectedWalletAdress = "<?php echo $ethadress ?>";
         cryptoType = "ETH";
+		 
     } else if (crypto == 'trx') {
         document.getElementById("cryptoDropdown").value = "Tron (TRX)";
 		SelectedWalletAdress = "<?php echo $trxadress ?>";
