@@ -42,7 +42,7 @@ if (!empty($transaction_data['trc20TransferInfo']) && isset($transaction_data['t
 }   
 
 
-   $myTrxAddress = 'TRsWGn75MPwMgKaEuETPqB4P67e6w9L9JT';
+   $myTrxAddress = 'TUz2LvQsWr3wCBdwDGhwAV6FNBADKQ4npH';
     $result = array(
         "Status" => "",
         "SentAmount" => "",
