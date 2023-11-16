@@ -14,9 +14,12 @@ Step 2 : Edit Wallet Address in api.php (Line : 45)  <br/>
 Step 3 : Test it!
 
 ### Test
+Send This Address 5 - 50 TRX = "TUz2LvQsWr3wCBdwDGhwAV6FNBADKQ4npH" <br/>
+OR <br/>
 Visit this link :  https://tronscan.org/#/blockchain/transactions <br/>
 Click any transaction <br/>
 Copy "To Address" and "Hash" informaitons <br/>
+
 
 ### Rules / Security
 It must have been sent a maximum of 5 minutes ago.
