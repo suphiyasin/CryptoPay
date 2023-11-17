@@ -6,7 +6,7 @@ For example: saving the hash information in the database, this way each payment 
 index.html<br/>
 ### RealTime Payment System
 PHP => JetCrypto.php<br/>
-JS => Cooming Soon<br/>
+
 
 ### Install
 Step 1 : Add Wallet Addresses in JetCrypto.php (first 6 lines) and Edit Amount in JetCrypto.php (Line : 71) <br/>
